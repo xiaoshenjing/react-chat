@@ -12,3 +12,19 @@ font-size: 18px;
 outline: none;
 resize: none;
 `
+
+export const Publish = styled.button`
+float: right;
+padding: 6px 10px;
+border-radius: 4px;
+font-size: 16px;
+overflow: hidden;
+outline: none;
+background-color: #eff;
+border: 1px solid #eee;
+:hover{
+    background-color: #fff;
+}
+`
+
+export const ListWrapper = styled.div``
