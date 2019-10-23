@@ -1,12 +1,19 @@
 import React, { PureComponent, Fragment } from 'react'
-import { Input, Publish, ListWrapper } from './style'
+import { Input } from './style'
+import { Button } from 'antd'
 import ItemList from '../../components/ItemList'
 
 class Content extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {
-            list: [1, 2, 3, 4, 5]
+            list: [
+                { id: 1, name: 'xiao1', content: 'hello world1' },
+                { id: 2, name: 'xiao2', content: 'hello world2' },
+                { id: 3, name: 'xiao3', content: 'hello world3' },
+                { id: 4, name: 'xiao4', content: 'hello world4' },
+                { id: 5, name: 'xiao5', content: 'hello world5' },
+            ]
         }
     }
 
@@ -14,18 +21,19 @@ class Content extends PureComponent {
         return (
             <Fragment>
                 <Input></Input>
-                <Publish>发布</Publish>
-                <ListWrapper>
+                <Button block>发布</Button>
+                <div>
                     {
-                        this.state.list.forEach((item, i) => (
+                        this.state.list.map(item => (
                             <ItemList
-                                key={i}
-                                content={item}
-                                index={i}
-                            ></ItemList>
+                                key={item.id}
+                                id={item.id}
+                                content={item.content}
+                                name={item.name}
+                            />
                         ))
                     }
-                </ListWrapper>
+                </div>
             </Fragment>
         )
     }

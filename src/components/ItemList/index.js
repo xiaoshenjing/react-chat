@@ -1,22 +1,25 @@
 import React from 'react'
-import { List } from './style'
+import { List, Delete, Title, Content } from './style'
 import PropTypes from 'prop-types'
+import { Button } from 'antd'
 
 const ItemList = (props) => {
-    const { index, content } = props
+    const { id, name, content } = props
     return (
-        <List>{index}---{content}</List>
+        <List>
+            <Delete>
+                <Button type="danger" size='small'>删除</Button>
+            </Delete>
+            <Title>{id}-{name}</Title>
+            <Content>{content}</Content>
+        </List>
     )
 }
 
 ItemList.propTypes = {
-    index: PropTypes.number.isRequired,
-    content: PropTypes.number.isRequired
-}
-
-ItemList.defaultProps = {
-    index: 1,
-    content: '123'
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
 }
 
 export default ItemList

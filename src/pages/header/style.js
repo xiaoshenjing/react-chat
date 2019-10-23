@@ -10,17 +10,3 @@ export const Title = styled.div`
 font-size: 24px;
 color: #444;
 `
-
-export const Login = styled.button`
-background-color: #fff;
-outline: none;
-border: 1px solid #444;
-padding: 6px 10px;
-background-color: #fef;
-border-radius: 5px;
-font-size: 16px;
-cursor: pointer;
-:hover{
-    background-color: #fff;
-}
-`
