@@ -1,11 +1,18 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { combineReducers } from 'redux-immutable';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import contentReducer from './content/reducer';
+import thunk from 'redux-thunk'
 
-const reducer = combineReducers({
-    content: contentReducer,
+const reducerModules = require.context('./reducer', true, /\.js$/)
+
+const asyncReducer = {}
+reducerModules.keys().map(item => {
+    const value = reducerModules(item)
+    asyncReducer[item.match(/\/(\S*)\./)[1]] = value.default
+    return false
 })
+
+const reducer = combineReducers(asyncReducer)
 
 const composeEnhancers = composeWithDevTools({
     features: {
@@ -23,6 +30,8 @@ const composeEnhancers = composeWithDevTools({
     // Specify here name, actionsBlacklist, actionsCreators and other options
 });
 
-const store = createStore(reducer, composeEnhancers());
+const store = createStore(reducer, composeEnhancers(
+    applyMiddleware(thunk)
+));
 
 export default store

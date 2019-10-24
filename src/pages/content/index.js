@@ -1,9 +1,9 @@
 import React, { PureComponent, Fragment } from 'react'
-import { Input } from './style'
-import { Button } from 'antd'
 import { connect } from 'react-redux'
+import { Button } from 'antd'
+import { Input } from './style'
 import ItemList from '../../components/ItemList'
-import action from './reducer/action'
+import action from '@/store/action/content'
 
 class Content extends PureComponent {
     render() {
@@ -12,7 +12,7 @@ class Content extends PureComponent {
         return (
             <Fragment>
                 <Input ref={input => { this.input = input }}></Input>
-                <Button block onClick={() => addList(this.input.value)}>发布</Button>
+                <Button type="primary" block onClick={() => addList(this.input.value)}>发布</Button>
                 {
                     list.map((item, index) => (
                         <ItemList
@@ -28,23 +28,26 @@ class Content extends PureComponent {
             </Fragment>
         )
     }
-}
 
-const mapStateToProps = (state) => {
-    return {
-        list: state.getIn(['content', 'list'])
+    componentDidMount() {
+        this.props.getList()
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addList(content, id = 0, name = 'bob') {
-            dispatch(action.add({ id, name, content }))
-        },
-        delectList(index) {
-            dispatch(action.delete(index))
-        }
-    }
-}
+const mapStateToProps = (state) => ({
+    list: state.getIn(['content', 'list'])
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Content)
+const mapDispatchToProps = (dispatch) => ({
+    addList(content, id = 0, name = 'bob') {
+        dispatch(action.addList({ id, name, content }))
+    },
+    delectList(index) {
+        dispatch(action.deleteList(index))
+    },
+    getList() {
+        action.getList(dispatch)
+    }
+})
+
+export const _content = connect(mapStateToProps, mapDispatchToProps)(Content)

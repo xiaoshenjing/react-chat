@@ -1,13 +1,8 @@
 import { fromJS } from 'immutable'
-import enums from './enums'
+import enums from '../enums/content'
 
 const defaultProps = fromJS({
-    list: [
-        { id: 1, name: 'xiao1', content: 'hello world1' },
-        { id: 2, name: 'xiao2', content: 'hello world2' },
-        { id: 3, name: 'xiao3', content: 'hello world3' },
-        { id: 4, name: 'xiao4', content: 'hello world4' },
-    ]
+    list: []
 })
 
 export default (state = defaultProps, action) => {
@@ -16,6 +11,8 @@ export default (state = defaultProps, action) => {
             return state.set('list', state.get('list').push(fromJS(action.item)))
         case enums.DELETE_LIST:
             return state.set('list', state.get('list').delete(action.index))
+        case enums.GET_LIST:
+            return state.set('list', fromJS(action.data))
         default:
             return state
     }

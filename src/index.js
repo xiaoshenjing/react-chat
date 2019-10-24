@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from '@/serviceWorker';
-import App from './pages';
 import 'antd/dist/antd.css';
+import App from './pages';
 import './style.scss'
-import './mock'
+import './utils/mock'
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

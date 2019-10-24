@@ -11,6 +11,7 @@ color: #444;
 export const Title = styled.div`
 color: #888;
 font-size: 16px;
+margin-bottom: 20px;
 ::after{
 content:':'
 }

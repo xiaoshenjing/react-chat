@@ -1,15 +1,18 @@
 import React from 'react';
-import { AppWrapper } from './style'
 import { Provider } from 'react-redux'
-import store from './store'
-import Header from './header';
-import Content from './content';
+import { AppWrapper } from './style'
+import { Router } from '../router'
+import store from '../store'
+
+// 导出到 router
+export { _header as Header } from './header';
+export { _content as Content } from './content';
+export { _login as Login } from './login';
 
 const App = () => (
     <Provider store={store}>
         <AppWrapper>
-            <Header></Header>
-            <Content></Content>
+            <Router></Router>
         </AppWrapper>
     </Provider>
 )
