@@ -11,22 +11,20 @@ class Content extends PureComponent {
 
         return (
             <Fragment>
-                <Input innerRef={input => { this.input = input }}></Input>
-                <Button block onClick={addList(this.input.value)}>发布</Button>
-                <div>
-                    {
-                        list.map((item, index) => (
-                            <ItemList
-                                key={item.get('id')}
-                                id={item.get('id')}
-                                content={item.get('content')}
-                                name={item.get('name')}
-                                index={index}
-                                delectList={delectList}
-                            />
-                        ))
-                    }
-                </div>
+                <Input ref={input => { this.input = input }}></Input>
+                <Button block onClick={() => addList(this.input.value)}>发布</Button>
+                {
+                    list.map((item, index) => (
+                        <ItemList
+                            key={index}
+                            id={item.get('id')}
+                            content={item.get('content')}
+                            name={item.get('name')}
+                            index={index}
+                            delectList={delectList}
+                        />
+                    ))
+                }
             </Fragment>
         )
     }
@@ -34,7 +32,7 @@ class Content extends PureComponent {
 
 const mapStateToProps = (state) => {
     return {
-        list: state.content.get('list')
+        list: state.getIn(['content', 'list'])
     }
 }
 

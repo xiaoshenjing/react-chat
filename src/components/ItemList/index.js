@@ -8,7 +8,7 @@ const ItemList = (props) => {
     return (
         <List>
             <Delete>
-                <Button type="danger" size='small' onClick={delectList(index)}>删除</Button>
+                <Button type="danger" size='small' onClick={() => delectList(index)}>删除</Button>
             </Delete>
             <Title>{id}-{name}</Title>
             <Content>{content}</Content>

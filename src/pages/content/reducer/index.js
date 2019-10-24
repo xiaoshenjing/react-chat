@@ -13,9 +13,9 @@ const defaultProps = fromJS({
 export default (state = defaultProps, action) => {
     switch (action.type) {
         case enums.ADD_LIST:
-            return state.set('list', fromJS(action.value))
+            return state.set('list', state.get('list').push(fromJS(action.item)))
         case enums.DELETE_LIST:
-            return state.set('list', fromJS(action.value))
+            return state.set('list', state.get('list').delete(action.index))
         default:
             return state
     }
