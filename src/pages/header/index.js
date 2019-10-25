@@ -1,42 +1,61 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { Button } from 'antd'
 import { Wrapper, Title } from './style'
-import action from '@/store/action/header'
+import actionHeader from '@/store/action/header'
+import actionLogin from '@/store/action/login'
 
 class Header extends PureComponent {
     render() {
-        const { flag, openLogin, closeLogin } = this.props
+        const { flag, openLogin, closeLogin, login, logout } = this.props
 
         return (
             <Wrapper>
                 <Title>欢迎发布您的留言：</Title>
                 {
-                    flag ?
-                        <Link to='/content'>
-                            <Button type='danger' onClick={() => closeLogin()}>返回</Button>
-                        </Link>
+                    login ?
+                        <Fragment>
+                            <Redirect to='/content' />
+                            <Button type='danger' onClick={() => logout()}>注销</Button>
+                        </Fragment>
                         :
-                        <Link to='/login'>
-                            <Button type='primary' onClick={() => openLogin()}>登录</Button>
-                        </Link>
+                        flag ?
+                            <Link to='/content'>
+                                <Button type='primary' onClick={() => closeLogin()}>返回</Button>
+                            </Link>
+                            :
+                            <Link to='/login'>
+                                <Button type='primary' onClick={() => openLogin()}>登录</Button>
+                            </Link>
+
                 }
             </Wrapper>
         )
     }
+
+    UNSAFE_componentWillMount() {
+        this.props.getLogin()
+    }
 }
 
 const mapStateToProps = (state) => ({
-    flag: state.getIn(['header', 'flag'])
+    flag: state.getIn(['header', 'flag']),
+    login: state.getIn(['login', 'login'])
 })
 
 const mapDispatchToProps = (dispatch) => ({
     openLogin() {
-        dispatch(action.openLogin())
+        dispatch(actionHeader.openLogin())
     },
     closeLogin() {
-        dispatch(action.closeLogin())
+        dispatch(actionHeader.closeLogin())
+    },
+    logout() {
+        actionLogin.logout(dispatch)
+    },
+    getLogin() {
+        actionLogin.getLogin(dispatch)
     }
 })
 

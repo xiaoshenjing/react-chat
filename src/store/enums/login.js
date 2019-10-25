@@ -1,4 +1,6 @@
 export default {
-    LOGIN_IN: Symbol('login_in'),
-    REGISTER_IN: Symbol('register_in')
+    LOGIN: Symbol('login'),
+    LOGOUT: Symbol('logout'),
+    REGISTER: Symbol('register'),
+    GET_LOGIN: Symbol('get_login'),
 }

@@ -2,11 +2,11 @@ import React, { PureComponent } from 'react'
 import { Button } from 'antd'
 import { connect } from 'react-redux'
 import { Wrapper, Label, Input, ButtonWrapper } from './style'
-import action from '@/store/action/login'
+import actionLogin from '@/store/action/login'
 
 class Login extends PureComponent {
     render() {
-        const { loginIn, registerIn } = this.props
+        const { login, register } = this.props
 
         return (
             <Wrapper>
@@ -19,8 +19,8 @@ class Login extends PureComponent {
                     <Input ref={password => this.password = password}></Input>
                 </Label>
                 <ButtonWrapper>
-                    <Button type='default' onClick={() => loginIn()}>登陆</Button>
-                    <Button type='primary' onClick={() => registerIn()}>注册</Button>
+                    <Button type='default' onClick={() => login({ account: this.account.value, password: this.password.value })}>登陆</Button>
+                    <Button type='primary' onClick={() => register({ account: this.account.value, password: this.password.value })}>注册</Button>
                 </ButtonWrapper>
             </Wrapper>
         )
@@ -32,11 +32,11 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    loginIn() {
-        dispatch(action.loginIn())
+    login(data) {
+        actionLogin.login(dispatch, data)
     },
-    registerIn() {
-        dispatch(action.registerIn())
+    register(data) {
+        actionLogin.register(dispatch, data)
     }
 })
 

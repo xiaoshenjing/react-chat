@@ -22,6 +22,10 @@ font-size: 18px;
 text-indent: 2em;
 `
 
-export const Delete = styled.div`
+export const Wrapper = styled.div`
+width: 12%;
 float: right;
+display: flex;
+align-items: center;
+justify-content: space-between;
 `

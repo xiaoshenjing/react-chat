@@ -10,7 +10,7 @@ font-size: 18px;
 display: flex;
 align-items: center;
 justify-content: space-between;
-width: 500px;
+width: 80%;
 margin: 10px auto;
 `
 
@@ -18,11 +18,11 @@ export const Input = styled.input`
 background-color: #efefef;
 width: 80%;
 outline: none;
-border: 1px solid #eee;
 border-radius: 8px;
 padding: 8px;
 box-sizing: border-box;
 font-size: 16px;
+border: 1px solid #fdd;
 :focus{
     border: 1px solid #ddf;
 }
@@ -33,5 +33,5 @@ margin: 60px auto 0;
 display: flex;
 align-items: center;
 justify-content: space-between;
-width: 200px;
+width: 40%;
 `

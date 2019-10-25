@@ -14,6 +14,7 @@ class Base {
                 return Promise.resolve(response)
             },
             error => {
+                console.log(error);
                 switch (error.response.status) {
                     case 400:
                         error.message = '错误请求'
@@ -60,7 +61,6 @@ class Base {
                     default:
                         error.message = `连接错误,${error.response.msg}`
                 }
-                console.log(error.message);
                 return Promise.reject(error)
             }
         )
@@ -76,31 +76,31 @@ class Base {
         }
     }
 
-    async get(url, { data = '', fullFlag = false } = {}) {
+    async get(url, { data = null, fullFlag = false } = {}) {
         this.check()
         const res = await this.axios.get(url, data)
         return this.full(res, fullFlag)
     }
 
-    async post(url, { data = '', fullFlag = false } = {}) {
+    async post(url, { data = null, fullFlag = false } = {}) {
         this.check()
-        const res = await this.axios.post(url, data)
+        const res = await this.axios.post(url, JSON.stringify(data))
         return this.full(res, fullFlag)
     }
 
-    async put(url, { data = '', fullFlag = false } = {}) {
+    async put(url, { data = null, fullFlag = false } = {}) {
         this.check()
         const res = await this.axios.put(url, data)
         return this.full(res, fullFlag)
     }
 
-    async delete(url, { data = '', fullFlag = false } = {}) {
+    async delete(url, { data = null, fullFlag = false } = {}) {
         this.check()
         const res = await this.axios.delete(url, data)
         return this.full(res, fullFlag)
     }
 }
 
-const http = new Base('')
+const http = new Base('/')
 
 export default http
