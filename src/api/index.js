@@ -25,3 +25,13 @@ export function logout() {
 export function addList({ content }) {
     return http.post('list', { data: { content } })
 }
+
+// delete
+export function deleteList({ id }) {
+    return http.delete('list', { data: { id } })
+}
+
+// put
+export function editList({ id, content }) {
+    return http.put('list', { data: { id, content } })
+}

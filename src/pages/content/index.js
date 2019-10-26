@@ -43,11 +43,11 @@ const mapDispatchToProps = (dispatch) => ({
     addList(content) {
         actionContent.addList(dispatch, content)
     },
-    editList(id) {
-        dispatch(actionContent.editList(id))
+    editList(id, content) {
+        actionContent.editList(dispatch, id, content)
     },
     delectList(id) {
-        dispatch(actionContent.deleteList(id))
+        actionContent.deleteList(dispatch, id)
     },
     getList() {
         actionContent.getList(dispatch)
