@@ -16,12 +16,12 @@ class Header extends PureComponent {
                 {
                     login ?
                         <Fragment>
-                            <Redirect to='/content' />
+                            <Redirect to='/' />
                             <Button type='danger' onClick={() => logout()}>注销</Button>
                         </Fragment>
                         :
                         flag ?
-                            <Link to='/content'>
+                            <Link to='/'>
                                 <Button type='primary' onClick={() => closeLogin()}>返回</Button>
                             </Link>
                             :
