@@ -21,3 +21,7 @@ export function register({ account, password }) {
 export function logout() {
     return http.post('logout')
 }
+
+export function addList({ content }) {
+    return http.post('list', { data: { content } })
+}

@@ -22,6 +22,16 @@ const getList = () => {
     return res
 }
 
+const postList = () => {
+    let res = JSON.parse(JSON.stringify(result))
+    res.data.item = {
+        id: Random.integer(0, 1000),
+        name: Random.ctitle(2, 9),
+        content: Random.cparagraph(7, 9)
+    }
+    return res
+}
+
 const getLogin = () => {
     let res = JSON.parse(JSON.stringify(result))
     res.data.login = true
@@ -38,6 +48,7 @@ const decroate = (url, method, data) => { Mock.mock(RegExp(`${url}.*`), method, 
 decroate('list', 'get', getList())
 decroate('list', 'delete', success)
 decroate('list', 'pull', success)
+decroate('list', 'post', postList())
 
 decroate('login', 'get', getLogin())
 decroate('login', 'post', success)

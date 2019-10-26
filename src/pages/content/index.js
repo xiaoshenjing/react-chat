@@ -14,7 +14,17 @@ class Content extends PureComponent {
                 <Input ref={input => { this.input = input }}></Input>
                 <Button type="primary" block onClick={() => addList(this.input.value)}>发布</Button>
                 {
-                    list.map((item, index) => ItemList({ delectList, editList, index, id: item.get('id'), content: item.get('content'), name: item.get('name') })(<div>123</div>))
+                    list.map((item, index) =>
+                        < ItemList
+                            key={index}
+                            delectList={delectList}
+                            editList={editList}
+                            index={index}
+                            id={item.get('id')}
+                            content={item.get('content')}
+                            name={item.get('name')}
+                        />
+                    )
                 }
             </Fragment>
         )
@@ -30,8 +40,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    addList(content, id = 0, name = 'bob') {
-        dispatch(actionContent.addList({ id, name, content }))
+    addList(content) {
+        actionContent.addList(dispatch, content)
     },
     editList(id) {
         dispatch(actionContent.editList(id))
