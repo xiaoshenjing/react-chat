@@ -1,54 +1,43 @@
-import React from 'react'
-import { List, Wrapper, Title, Content } from './style'
-import PropTypes from 'prop-types'
-import { Button, Modal, Input } from 'antd'
+import React, { PureComponent } from 'react'
+import hocComponent from '@/hoc/ItemList'
+import { Input, Modal } from 'antd'
 const { TextArea } = Input
 
+const ItemList = (data) => {
+    const Res = hocComponent(data)(props => {
+        const { visible, handleOk, handleCancel } = props
 
+        class Res extends PureComponent {
+            state = {
+                value: ''
+            }
 
+            onChange = ({ target: { value } }) => {
+                this.setState({ value });
+            }
 
-const ItemList = (props) => {
-    const { id, name, content, index, delectList, editList } = props
-    let value = ''
-    let visible = false
-    const handleOk = () => { editList(index, value) }
-    const handleCancel = () => { visible = false }
-    const edit = () => {
-        visible = true
-        console.log(visible)
-    }
+            render() {
+                return (
+                    <Modal
+                        title="修改留言"
+                        visible={visible}
+                        onOk={() => handleOk(this.state.value)}
+                        onCancel={handleCancel}
+                    >
+                        <TextArea
+                            value={this.state.value}
+                            onChange={this.onChange}
+                            placeholder="Controlled autosize"
+                            autoSize={{ minRows: 3, maxRows: 5 }}
+                        />
+                    </Modal>
+                )
+            }
+        }
+        return <Res />
+    })
 
-    return (
-        <List>
-            <Wrapper>
-                <Button type="primary" size='small' onClick={() => edit()}>修改</Button>
-                <Button type="danger" size='small' onClick={() => delectList(index)}>删除</Button>
-            </Wrapper>
-            <Title>{id}-{name}</Title>
-            <Content>{content}</Content>
-            <Modal
-                title="修改留言"
-                visible={visible}
-                onOk={handleOk}
-                onCancel={handleCancel}
-            >
-                <TextArea
-                    value={value}
-                    placeholder="Controlled autosize"
-                    autoSize={{ minRows: 3, maxRows: 5 }}
-                />
-            </Modal>
-        </List>
-    )
-}
-
-ItemList.propTypes = {
-    index: PropTypes.number.isRequired,
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    editList: PropTypes.func.isRequired,
-    delectList: PropTypes.func.isRequired,
+    return <Res />
 }
 
 export default ItemList

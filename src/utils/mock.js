@@ -46,9 +46,9 @@ const success = (() => {
 const decroate = (url, method, data) => { Mock.mock(RegExp(`${url}.*`), method, data) }
 
 decroate('list', 'get', getList())
-decroate('list', 'delete', success)
-decroate('list', 'pull', success)
 decroate('list', 'post', postList())
+decroate('list', 'delete', success)
+decroate('list', 'put', success)
 
 decroate('login', 'get', getLogin())
 decroate('login', 'post', success)

@@ -16,7 +16,7 @@ export default (state = defaultProps, action) => {
             return state.set('list', state.get('list').delete(action.id))
         case enums.EDIT_LIST:
             message.success('修改成功')
-            return state.set('list', state.getIn(['list', action.id]).update('content', action.content))
+            return state.setIn(['list', action.id, 'content'], action.content)
         case enums.GET_LIST:
             return state.set('list', fromJS(action.data))
         default:
